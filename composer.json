@@ -1,0 +1,19 @@
+{
+  "name": "sgabriel/328/final",
+  "authors": [
+    {
+      "name": "Samantha Gabriel",
+      "email": "sgabriel@mail.greenriver.edu"
+    },
+    {
+      "name": "Nicolas Alexander",
+      "email": "nalexander5@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["classes/"]
+  }
+}
