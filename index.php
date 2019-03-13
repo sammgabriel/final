@@ -15,9 +15,7 @@ $f3->set('DEBUG',3);
 //define a default route
 $f3->route('GET /', function(){
 
-    echo "Hello!";
-
-    $template = new Template;
+    $template = new Template();
     echo $template->render('views/home.html');
 });
 

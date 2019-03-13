@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/final.css">
     <title>Overwatch LFG</title>
 </head>
 <body>
@@ -29,8 +30,12 @@
 
             <h2>Let's get started!</h2><br>
 
-            <!-- <form method="" action="#"> -->
-            <input type="submit" class="btn btn-dark text-warning btn-lg" value="Create An Entry"><br>
+            <a id="create" class="btn btn-dark text-warning btn-lg">Join</a>
+            <div id="gameType">
+                <input type="radio" class="mt-4" id="casual" value="casual"> Casual<br>
+                <input type="radio" class="mb-3" value="ranked"> Competitive<br>
+                <a class="btn btn-dark text-warning btn-sm mb-3">Next</a>
+            </div>
             <h4>or</h4>
             <input type="submit" class="btn btn-dark text-warning btn-lg mb-5" value="View Gamers">
             <!-- </form> -->
@@ -39,6 +44,14 @@
 
     </div>
 </div>
+
+<script src="JS/jquery-3.3.1.js"></script>
+<script src="JS/jquery-ajax.js"></script>
+<script src="JS/popper.min.js"></script>
+<script src="JS/bootstrap.min.js"></script>
+
+
+
 
 </body>
 </html>
