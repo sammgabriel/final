@@ -30,11 +30,9 @@
 
             <h2>Let's get started!</h2><br>
 
-            <form action="gamers" method="post" class="mb-3">
-                <input type="submit" class="btn btn-dark text-warning btn-lg" value="View Gamers">
-            </form>
-
             <a id="create" class="btn btn-dark text-warning btn-lg">Join</a>
+            <a href="gamers" class="btn btn-dark text-warning btn-lg">View Gamers</a>
+
             <!-- Field validation error -->
             <check if="{{ isset(@errors['type']) }}">
                 <p class="mt-3">{{ @errors['type']}}</p>
@@ -42,10 +40,14 @@
             <div id="gameType">
                 <form action="#" method="post" class="mt-3">
                     <div class="form-group form-check-inline">
-                        <input class="form-check-input" type="radio" value="Casual" name="type">
-                        <label class="form-check-label ml-2 mr-4">Casual</label><br>
-                        <input class="form-check-input" type="radio" value="Competitive" name="type">
-                        <label class="form-check-label ml-2 mr-4">Competitive</label>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input text-left" name="type" value="Casual">
+                            <label class="form-check-label">Casual</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" class="form-check-input text-left" name="type" value="Competitive">
+                            <label class="form-check-label">Competitive</label>
+                        </div>
                     </div>
                     <input type="submit" name="submit" class="btn btn-dark text-warning btn-sm mb-3" value="Next">
                 </form>
