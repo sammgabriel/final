@@ -48,7 +48,28 @@ $f3->set('heroes', array(
 $f3->set('platform', array("Xbox", "Playstation", "PC"));
 
 //define a default route
-$f3->route('GET /', function(){
+$f3->route('GET|POST /', function($f3){
+
+    if(isset($_POST['submit'])) {
+
+        if(!isset($_POST['type'])) {
+
+            $f3->set("errors['type']", "Please select a game type.");
+        }
+
+        else {
+
+            if ($_POST['type'] == "Casual") {
+
+                $f3->reroute("/casual");
+            }
+
+            else {
+
+                $f3->reroute("/competitive");
+            }
+        }
+    }
 
     $template = new Template();
     echo $template->render('views/home.html');
@@ -82,6 +103,12 @@ $f3->route('GET|POST /competitive', function($f3){
     echo $template->render('views/competitive.html');
 });
 
+//define a default route
+$f3->route('GET|POST /gamers', function($f3){
+
+    $template = new Template();
+    echo $template->render('views/all-gamers.html');
+});
 
 //run fat free
 $f3->run();

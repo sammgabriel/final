@@ -12,61 +12,75 @@
 
     <h1>Competitive</h1>
 
-    <div class="col-1"></div>
+    <div class="row">
 
-    <div class="col-10">
+        <div class="col-1"></div>
 
-        <form action="#" method="post">
+        <div class="col-8">
 
-            <div class="form-group">
-                <label class="font-weight-bold">Platform</label>
-                <select name="platform" id="platform" class="form-control">
-                    <option value="">Select One</option>
-                    <repeat group="{{ @platform }}" value="{{ @plat }}">
-                        <option value="{{ @plat }}">{{ @plat }}</option>
+            <form action="#" method="post">
+
+                <div class="form-group">
+                    <label class="font-weight-bold">Platform</label>
+                    <select name="platform" id="platform" class="form-control">
+                        <option value="">Select One</option>
+                        <repeat group="{{ @platform }}" value="{{ @plat }}">
+                            <option value="{{ @plat }}">{{ @plat }}</option>
+                        </repeat>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold">GamerTag/PSN/BattleTag</label>
+                    <input type="text" id="tag" name="tag" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bold mb-3">Competitive Rank</label><br>
+                    <repeat group="{{ @ranks }}" value="{{ @rank }}">
+                        <input type="radio" name="mode" value="{{ @rank }}"> {{ @rank }}<br>
                     </repeat>
+                </div>
 
-                </select>
-            </div>
+                <label class="font-weight-bold mb-3">Heroes</label><br>
+                <div class="form-check form-check-inline flex-wrap">
+                    <!-- Loops through the array of indoor interests and
+                        displays each one -->
+                    <repeat group="{{ @heroes }}" value="{{ @hero }}">
+                        <div class="col-3">
+                            <input type="checkbox" value="{{ @hero }}" name="heroes[]">
+                            <label class="form-check-label mr-3">{{ @hero }}</label>
+                        </div>
+                    </repeat>
+                </div><br><br>
 
-            <div class="form-group">
-                <label class="font-weight-bold">GamerTag/PSN/BattleTag</label>
-                <input type="text" id="tag" name="tag" class="form-control">
-            </div>
+                <label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
+                <div class="form-check form-check-inline flex-wrap">
+                    <!-- Loops through the array of indoor interests and
+                        displays each one -->
+                    <repeat group="{{ @heroes }}" value="{{ @hero }}">
+                        <div class="col-3">
+                            <input type="checkbox" value="{{ @hero }}" name="heroes[]">
+                            <label class="form-check-label mr-3">{{ @hero }}</label>
+                        </div>
+                    </repeat>
+                </div><br><br>
+                <input type="submit" class="btn btn-dark text-warning btn-lg mb-3"
+                       value="Next">
+            </form>
 
-            <div class="form-group">
-                <label class="font-weight-bold mb-3">Competitive Rank</label><br>
-                <repeat group="{{ @ranks }}" value="{{ @rank }}">
-                    <input type="radio" name="mode" value="{{ @rank }}"> {{ @rank }}<br>
-                </repeat>
-            </div>
+        </div>
 
-            <label class="font-weight-bold mb-3">Heroes</label><br>
-            <div class="form-check form-check-inline flex-wrap">
-                <!-- Loops through the array of indoor interests and
-                    displays each one -->
-                <repeat group="{{ @heroes }}" value="{{ @hero }}">
-                    <div class="col-3">
-                        <input type="checkbox" value="{{ @hero }}" name="heroes[]">
-                        <label class="form-check-label mr-3">{{ @hero }}</label>
-                    </div>
-                </repeat>
-            </div><br><br>
-
-            <label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
-            <div class="form-check form-check-inline flex-wrap">
-                <!-- Loops through the array of indoor interests and
-                    displays each one -->
-                <repeat group="{{ @heroes }}" value="{{ @hero }}">
-                    <div class="col-3">
-                        <input type="checkbox" value="{{ @hero }}" name="heroes[]">
-                        <label class="form-check-label mr-3">{{ @hero }}</label>
-                    </div>
-                </repeat>
-            </div><br><br>
-        </form>
+        <div class="col-3">
+            <form action="gamers" method="post">
+                <input type="submit" class="btn btn-dark text-warning btn-lg mb-5 float-right"
+                       value="View Gamers">
+            </form>
+        </div>
 
     </div>
+
 </div>
 
 </body>
