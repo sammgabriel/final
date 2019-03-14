@@ -17,9 +17,7 @@
         <div class="col-1"></div>
 
         <div class="col-8">
-
             <form action="#" method="post">
-
                 <div class="form-group">
                     <label class="font-weight-bold">Platform</label>
                     <select name="platform" class="form-control">
@@ -54,10 +52,9 @@
                     </repeat>
                 </div><br><br>
 
-                <label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
+                <!--<label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
                 <div class="form-check form-check-inline flex-wrap">
-                    <!-- Loops through the array of indoor interests and
-                        displays each one -->
+
                     <repeat group="{{ @heroes }}" value="{{ @hero }}">
                         <div class="col-3">
                             <input type="checkbox" value="{{ @hero }}" name="heroes[]">
@@ -66,9 +63,8 @@
                     </repeat>
                 </div><br><br>
                 <input type="submit" class="btn btn-dark text-warning btn-lg mb-3"
-                       value="Next"><br>
+                       value="Next"><br>-->
             </form>
-
         </div>
 
         <div class="col-3">
@@ -81,8 +77,6 @@
     </div>
 
 </div>
-
-
 
 </body>
 </html>
