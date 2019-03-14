@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/final.css">
+    <title>Casual</title>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Casual</h1>
+
+    <div class="col-1"></div>
+
+    <div class="col-10">
+
+        <form action="#" method="post">
+
+            <div class="form-group">
+                <label class="font-weight-bold">Platform</label>
+                <select name="platform" class="form-control">
+                    <option value="">Select One</option>
+                    <repeat group="{{ @platform }}" value="{{ @plat }}">
+                        <option value="{{ @plat }}">{{ @plat }}</option>
+                    </repeat>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold">GamerTag/PSN/BattleTag</label>
+                <input type="text" id="tag" name="tag" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label class="font-weight-bold mb-3">Game Modes</label><br>
+                <repeat group="{{ @modes }}" key="{{ @game }}" value="{{ @mode }}">
+                    <input type="radio" name="mode" value="{{ @mode }}"> {{ @game }}<br>
+                </repeat>
+            </div>
+
+            <label class="font-weight-bold mb-3">Heroes</label><br>
+            <div class="form-check form-check-inline flex-wrap">
+                <!-- Loops through the array of indoor interests and
+                    displays each one -->
+                <repeat group="{{ @heroes }}" value="{{ @hero }}">
+                    <div class="col-3">
+                        <input type="checkbox" value="{{ @hero }}" name="heroes[]">
+                        <label class="form-check-label mr-3">{{ @hero }}</label>
+                    </div>
+                </repeat>
+            </div><br><br>
+
+            <label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
+            <div class="form-check form-check-inline flex-wrap">
+                <!-- Loops through the array of indoor interests and
+                    displays each one -->
+                <repeat group="{{ @heroes }}" value="{{ @hero }}">
+                    <div class="col-3">
+                        <input type="checkbox" value="{{ @hero }}" name="heroes[]">
+                        <label class="form-check-label mr-3">{{ @hero }}</label>
+                    </div>
+                </repeat>
+            </div><br><br>
+        </form>
+
+    </div>
+</div>
+
+
+
+</body>
+</html>
