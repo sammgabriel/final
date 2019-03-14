@@ -81,6 +81,11 @@ $f3->route('GET|POST /casual', function($f3){
     $f3->set('modes', array("Quick Play"=>"Quick Play" ,
         "Arcade"=>"Arcade", "No Preference"=>"Casual"));
 
+    if (isset($_POST['submit'])) {
+
+        $f3->reroute("/summary");
+    }
+
     $template = new Template();
     echo $template->render('views/casual.html');
 });
@@ -99,15 +104,27 @@ $f3->route('GET|POST /competitive', function($f3){
         "Grandmaster"
     ));
 
+    if(isset($_POST['submit'])) {
+
+        $f3->reroute("/summary");
+    }
+
     $template = new Template();
     echo $template->render('views/competitive.html');
 });
 
 //define a default route
-$f3->route('GET|POST /gamers', function($f3){
+$f3->route('GET|POST /gamers', function(){
 
     $template = new Template();
     echo $template->render('views/all-gamers.html');
+});
+
+//define a default route
+$f3->route('GET|POST /summary', function(){
+
+    $template = new Template();
+    echo $template->render('views/summary.html');
 });
 
 //run fat free

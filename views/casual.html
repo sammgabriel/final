@@ -51,28 +51,16 @@
                         </div>
                     </repeat>
                 </div><br><br>
-
-                <!--<label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
-                <div class="form-check form-check-inline flex-wrap">
-
-                    <repeat group="{{ @heroes }}" value="{{ @hero }}">
-                        <div class="col-3">
-                            <input type="checkbox" value="{{ @hero }}" name="heroes[]">
-                            <label class="form-check-label mr-3">{{ @hero }}</label>
-                        </div>
-                    </repeat>
-                </div><br><br>
-                <input type="submit" class="btn btn-dark text-warning btn-lg mb-3"
-                       value="Next"><br>-->
+                <input type="submit" name="submit" class="btn btn-dark text-warning btn-lg mb-3"
+                       value="Next"><br>
             </form>
         </div>
 
         <div class="col-3">
-            <form action="gamers" method="post">
-                <input type="submit" class="btn btn-dark text-warning btn-lg mb-5 float-right"
-                       value="View Gamers">
-            </form>
+            <a href="gamers" class="btn btn-dark text-warning btn-lg mb-5 float-right">View Gamers</a>
+
         </div>
+
 
     </div>
 

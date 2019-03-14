@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label class="font-weight-bold mb-3">Competitive Rank</label><br>
                     <repeat group="{{ @ranks }}" value="{{ @rank }}">
-                        <input type="radio" name="mode" value="{{ @rank }}"> {{ @rank }}<br>
+                        <input type="radio" name="rank" value="{{ @rank }}"> {{ @rank }}<br>
                     </repeat>
                 </div>
 
@@ -61,12 +61,12 @@
                         displays each one -->
                     <repeat group="{{ @heroes }}" value="{{ @hero }}">
                         <div class="col-3">
-                            <input type="checkbox" value="{{ @hero }}" name="heroes[]">
+                            <input type="checkbox" value="{{ @hero }}" name="pairs[]">
                             <label class="form-check-label mr-3">{{ @hero }}</label>
                         </div>
                     </repeat>
                 </div><br><br>
-                <input type="submit" class="btn btn-dark text-warning btn-lg mb-3"
+                <input type="submit" name="submit" class="btn btn-dark text-warning btn-lg mb-3"
                        value="Next">
             </form>
 
