@@ -26,11 +26,18 @@
                             <option value="{{ @plat }}">{{ @plat }}</option>
                         </repeat>
                     </select>
+                    <check if="{{isset(@errors['platform'])}}">
+                        <p class="alert-danger font-weight-bold">{{@errors['platform']}}</p>
+                    </check>
                 </div>
 
                 <div class="form-group">
                     <label class="font-weight-bold">GamerTag/PSN/BattleTag</label>
-                    <input type="text" id="tag" name="tag" class="form-control">
+                    <input type="text" id="tag" name="tag" value="{{@_POST.tag}}" class="form-control">
+                    <check if="{{isset(@errors['tag'])}}">
+                        <p class="alert-danger font-weight-bold">{{@errors['tag']}}</p>
+                    </check>
+
                 </div>
 
                 <div class="form-group">
@@ -38,6 +45,8 @@
                     <repeat group="{{ @modes }}" key="{{ @game }}" value="{{ @mode }}">
                         <input type="radio" name="mode" value="{{ @mode }}"> {{ @game }}<br>
                     </repeat>
+                        <p class="alert-danger font-weight-bold">{{ @errors['mode']}}</p>
+
                 </div>
 
                 <label class="font-weight-bold mb-3">Heroes</label><br>
@@ -50,6 +59,9 @@
                             <label class="form-check-label mr-3">{{ @hero }}</label>
                         </div>
                     </repeat>
+                    <check if="{{isset(@errors['hero'])}}">
+                        <p class="alert-danger font-weight-bold">{{@errors['hero']}}</p>
+                    </check>
                 </div><br><br>
                 <input type="submit" name="submit" class="btn btn-dark text-warning btn-lg mb-3"
                        value="Next"><br>
