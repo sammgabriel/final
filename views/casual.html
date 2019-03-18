@@ -23,11 +23,18 @@
                     <select name="platform" class="form-control">
                         <option value="">Select One</option>
                         <repeat group="{{ @platform }}" value="{{ @plat }}">
-                            <option value="{{ @plat }}">{{ @plat }}</option>
+                            <check if="{{ @plat == @choice }}">
+                                <true>
+                                    <option value="{{ @plat }}" selected="selected">{{ @plat }}</option>
+                                </true>
+                                <false>
+                                    <option value="{{ @plat }}">{{ @plat }}</option>
+                                </false>
+                            </check>
                         </repeat>
                     </select>
-                    <check if="{{isset(@errors['platform'])}}">
-                        <p class="alert-danger font-weight-bold">{{@errors['platform']}}</p>
+                    <check if="{{ isset(@errors['platform']) }}">
+                        <p class="alert-danger font-weight-bold">{{ @errors['platform'] }}</p>
                     </check>
                 </div>
 
@@ -42,8 +49,20 @@
 
                 <div class="form-group">
                     <label class="font-weight-bold mb-3">Game Modes</label><br>
-                    <repeat group="{{ @modes }}" key="{{ @game }}" value="{{ @mode }}">
-                        <input type="radio" name="mode" value="{{ @mode }}"> {{ @game }}<br>
+                    <repeat group="{{ @modes }}" value="{{ @mode }}">
+                        <check if="{{ @mode == @choice }}">
+                            <true>
+                                <input class="form-check-input" type="radio" value="{{ @mode }}"
+                                       name="mode" checked="checked">
+                                <label class="form-check-label ml-2 mr-4">
+                                    {{ @mode }}</label><br>
+                            </true>
+                            <false>
+                                <input class="form-check-input" type="radio" value="{{ @mode }}" name="mode">
+                                <label class="form-check-label ml-2 mr-4">
+                                    {{ @mode }}</label><br>
+                            </false>
+                        </check>
                     </repeat>
                         <p class="alert-danger font-weight-bold">{{ @errors['mode']}}</p>
 
@@ -55,14 +74,15 @@
                         displays each one -->
                     <repeat group="{{ @heroes }}" value="{{ @hero }}">
                         <div class="col-3">
-                            <input type="checkbox" value="{{ @hero }}" name="heroes[]">
+                            <input type="checkbox" value="{{ @hero }}" name="heroes[]"
+                            <check if="{{ in_array(@hero, @choices)}}">checked</check>>
                             <label class="form-check-label mr-3">{{ @hero }}</label>
                         </div>
                     </repeat>
-                    <check if="{{isset(@errors['hero'])}}">
-                        <p class="alert-danger font-weight-bold">{{@errors['hero']}}</p>
-                    </check>
                 </div><br><br>
+                <check if="{{isset(@errors['hero'])}}">
+                    <p class="alert-danger font-weight-bold">{{@errors['hero']}}</p>
+                </check>
                 <input type="submit" name="submit" class="btn btn-dark text-warning btn-lg mb-3"
                        value="Next"><br>
             </form>

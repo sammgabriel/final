@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 //require autoload
 require_once('vendor/autoload.php');
-require_once ('model/validation.php');
+require_once ('model/validation-functions.php');
 session_start();
 
 //create and instance of the Base class
@@ -14,7 +14,7 @@ $f3 = Base::instance();
 //turn on fat free error reporting
 $f3->set('DEBUG',3);
 
-$f3->set('heroes', array(
+$heroes = array(
     "Ana",
     "Ashe",
     "Baptiste",
@@ -45,9 +45,13 @@ $f3->set('heroes', array(
     "Wrecking Ball",
     "Zarya",
     "Zenyatta"
-));
+);
 
-$f3->set('platform', array("Xbox", "Playstation", "PC"));
+$f3->set('heroes', $heroes);
+
+$platform = array("Xbox", "Playstation", "PC");
+
+$f3->set('platform', $platform);
 
 //define a default route
 $f3->route('GET|POST /', function($f3){
@@ -80,73 +84,77 @@ $f3->route('GET|POST /', function($f3){
 //define a default route
 $f3->route('GET|POST /casual', function($f3){
 
-    $f3->set('modes', array("Quick Play"=>"Quick Play" ,
-        "Arcade"=>"Arcade", "No Preference"=>"Casual"));
+    $modes = array("Quick Play", "Arcade", "No Preference");
+
+    $f3->set('modes', $modes);
 
     //when the user clicks submit
     if (isset($_POST['submit']))
     {
 
-
-        $hero = $_POST['hero'];
-
-        if (isset($_POST['platform']))
+        if (empty($_POST['platform']))
         {
-            print_r($_POST);
-            print_r($_SESSION);
 
-            if ($_POST['platform'])
-            {
-                $platform = $_POST['platform'];
-                $_SESSION = $platform;
-            }
-            else
-            {
-                $f3->set("errors['platform']", "Please choose a platform");
-            }
+            $f3->set("errors['platform']", "Please pick a platform");
 
         }
-        if (isset($_POST['tag'])) {
-            if ($_POST['tag'])
+
+        else {
+
+            $f3->set('choice', $_POST['platform']);
+        }
+
+        if (isset($_POST['tag']))
+        {
+
+            // validates tag
+            if (validTag($_POST['tag']))
             {
-                $tag = $_POST['tag'];
-                $_SESSION = $tag;
-            }
-            else
+                // creates a session variable if entry is valid
+                $_SESSION['tag'] = $_POST['tag'];
+            } else
             {
-                $f3->set("errors['tag']", "Please put in your tag");
+                // otherwise, displays an error
+                $f3->set("errors['tag']", "Please enter a valid tag");
             }
         }
 
         if (empty($_POST['mode']))
         {
 
-            if ($_POST['mode'])
-            {
-                $mode = $_POST['mode'];
+            $f3->set("errors['mode']", "Please choose a mode");
 
-            }
-            else
-            {
-                $f3->set("errors['mode']", "Please choose a mode");
-            }
-        }
-
-        if (empty($_POST['heroes']))
+        } else
         {
-            echo "<p>here</p>";
-            if ($_POST['heroes'] == "Ana")
-            {
-                echo "<p>fuck</p>";
-                $heroes = $_POST['heroes'];
 
-            }
-            else
-            {
-                $f3->set("errors['hero']", "Please choose at least one hero");
-            }
-
+            $f3->set('choice', $_POST['mode']);
         }
+
+        // if the user picks outdoor interests
+        if (isset($_POST['heroes']))
+        {
+            // validates the user's choices
+            foreach ($_POST['heroes'] as $hero)
+            {
+                if (!validHeroes($hero))
+                {
+                    // Otherwise, displays an error
+                    $f3->set("errors['hero']", "Please choose valid heroes.");
+                }
+            }
+
+            $f3->set('choices', $_POST['heroes']);
+
+        } else {
+
+            // Otherwise, displays an error
+            $f3->set("errors['hero']", "Please choose valid heroes.");
+        }
+
+
+        $choices = implode(", ", $f3->get('choices'));
+
+
 
     }
     $template = new Template();
