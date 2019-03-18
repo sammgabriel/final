@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 //require autoload
 require_once('vendor/autoload.php');
 require_once ('model/validation-functions.php');
+require_once ('model/database.php');
 session_start();
 
 //create and instance of the Base class
@@ -64,6 +65,7 @@ $f3->route('GET|POST /', function($f3){
         }
 
         else {
+            $f3->set("type",$_POST['type']);
 
             if ($_POST['type'] == "Casual") {
 
@@ -71,7 +73,6 @@ $f3->route('GET|POST /', function($f3){
             }
 
             else {
-
                 $f3->reroute("/competitive");
             }
         }
@@ -130,7 +131,7 @@ $f3->route('GET|POST /casual', function($f3){
             $f3->set('choice', $_POST['mode']);
         }
 
-        // if the user picks outdoor interests
+        // if the user picks heroes
         if (isset($_POST['heroes']))
         {
             // validates the user's choices
@@ -153,6 +154,15 @@ $f3->route('GET|POST /casual', function($f3){
 
 
         $choices = implode(", ", $f3->get('choices'));
+
+        $casual = new Casual($_POST['platform'], $_POST['tag'], $choices, $_POST['mode']);
+
+        $success = insertPlayer($casual->getPlatform(), $casual->getTag(),
+            $casual->getHeroes() ,$casual->getGameMode(), "", "", "casual");
+        if ($success)
+        {
+            $f3->reroute('/summary');
+        }
 
 
 
@@ -194,6 +204,8 @@ $f3->route('GET|POST /gamers', function(){
 
 //define a default route
 $f3->route('GET|POST /summary', function(){
+
+
 
     $template = new Template();
     echo $template->render('views/summary.html');

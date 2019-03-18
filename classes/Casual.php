@@ -8,13 +8,13 @@ class Casual {
     private $_gameMode;
 
 
-    function __construct($platform, $tag, $heroes, $_gameMode)
+    function __construct($platform, $tag, $heroes, $gameMode)
     {
 
         $this->_platform = $platform;
         $this->_tag = $tag;
         $this->_heroes = $heroes;
-        $this->_gameMode = $_gameMode;
+        $this->_gameMode = $gameMode;
     }
 
     /**
