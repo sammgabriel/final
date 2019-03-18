@@ -1,19 +1,24 @@
 <?php
 
+require '/home/nalexand/config.php';
+
+//require("/home/sgabriel/config.php");
+
 //connect to database
 function connect()
 {
-    require '/home/nalexand/config.php';
 
     try
     {
-        //instatiate a database object
-        $dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+        //instantiate a database object
+        $dbh = new PDO(DB_DSN, DB_USERNAME,
+            DB_PASSWORD);
         return $dbh;
-    }
-    catch (PDOException $e)
+
+    } catch (PDOException $e)
     {
         echo $e->getMessage();
+        return;
     }
 }
 
@@ -22,8 +27,8 @@ function insertPlayer($platform, $tag, $modes, $heros, $pair, $rank, $type)
     global $dbh;
 
     //define the query
-    $sql = "INSERT INTO final(platform, tag, modes, heros, pair, rank, type) 
-      Values(:platform, :tag, :modes, :heros, :pair, :rank, :type)";
+    $sql = "INSERT INTO final (platform, tag, modes, heros, pair, rank, type) 
+      VALUES (:platform, :tag, :modes, :heros, :pair, :rank, :type)";
 
     //prepare the statement
     $statement = $dbh->prepare($sql);
@@ -42,7 +47,6 @@ function insertPlayer($platform, $tag, $modes, $heros, $pair, $rank, $type)
 
     //return the result
     return $success;
-
 }
 
 

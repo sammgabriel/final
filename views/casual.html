@@ -74,8 +74,8 @@
                         displays each one -->
                     <repeat group="{{ @heroes }}" value="{{ @hero }}">
                         <div class="col-3">
-                            <input type="checkbox" value="{{ @hero }}" name="heroes[]"
-                            <check if="{{ in_array(@hero, @choices)}}">checked</check>>
+                            <input class="form-check-input" type="checkbox" value="{{ @hero }}" name="heroes[]"
+                            <check if="{{ in_array(@hero, @SESSION['heroes'])}}">checked = 'checked'</check>>
                             <label class="form-check-label mr-3">{{ @hero }}</label>
                         </div>
                     </repeat>

@@ -15,6 +15,9 @@ $f3 = Base::instance();
 //turn on fat free error reporting
 $f3->set('DEBUG',3);
 
+//Connect to the database
+$dbh = connect();
+
 $heroes = array(
     "Ana",
     "Ashe",
@@ -83,7 +86,11 @@ $f3->route('GET|POST /', function($f3){
 });
 
 //define a default route
-$f3->route('GET|POST /casual', function($f3){
+$f3->route('GET|POST /casual', function($f3) {
+
+    $isValid = true;
+
+    $_SESSION['heroes'] = array();
 
     $modes = array("Quick Play", "Arcade", "No Preference");
 
@@ -97,6 +104,7 @@ $f3->route('GET|POST /casual', function($f3){
         {
 
             $f3->set("errors['platform']", "Please pick a platform");
+            $isValid = false;
 
         }
 
@@ -117,6 +125,7 @@ $f3->route('GET|POST /casual', function($f3){
             {
                 // otherwise, displays an error
                 $f3->set("errors['tag']", "Please enter a valid tag");
+                $isValid = false;
             }
         }
 
@@ -124,6 +133,7 @@ $f3->route('GET|POST /casual', function($f3){
         {
 
             $f3->set("errors['mode']", "Please choose a mode");
+            $isValid = false;
 
         } else
         {
@@ -141,29 +151,34 @@ $f3->route('GET|POST /casual', function($f3){
                 {
                     // Otherwise, displays an error
                     $f3->set("errors['hero']", "Please choose valid heroes.");
+                    $isValid = false;
                 }
             }
 
-            $f3->set('choices', $_POST['heroes']);
+            $_SESSION['heroes'] = $_POST['heroes'];
+            $f3->set('choices', $_SESSION['heroes']);
+            $choices = implode(", ", $_POST['heroes']);
 
         } else {
 
             // Otherwise, displays an error
             $f3->set("errors['hero']", "Please choose valid heroes.");
+            $isValid = false;
         }
 
+        if ($isValid) {
 
-        $choices = implode(", ", $f3->get('choices'));
+            $casual = new Casual($_POST['platform'], $_POST['tag'], $choices, $_POST['mode']);
 
-        $casual = new Casual($_POST['platform'], $_POST['tag'], $choices, $_POST['mode']);
+            $success = insertPlayer($casual->getPlatform(), $casual->getTag(),
+                $casual->getHeroes() ,$casual->getGameMode(), "", "", "casual");
 
-        $success = insertPlayer($casual->getPlatform(), $casual->getTag(),
-            $casual->getHeroes() ,$casual->getGameMode(), "", "", "casual");
-        if ($success)
-        {
-            $f3->reroute('/summary');
+            if ($success)
+            {
+                $f3->reroute('/summary');
+            }
+
         }
-
 
 
     }
