@@ -102,10 +102,8 @@ $f3->route('GET|POST /casual', function($f3) {
 
         if (empty($_POST['platform']))
         {
-
             $f3->set("errors['platform']", "Please pick a platform");
             $isValid = false;
-
         }
 
         else {
@@ -170,8 +168,8 @@ $f3->route('GET|POST /casual', function($f3) {
 
             $casual = new Casual($_POST['platform'], $_POST['tag'], $choices, $_POST['mode']);
 
-            $success = insertPlayer($casual->getPlatform(), $casual->getTag(),
-                $casual->getHeroes() ,$casual->getGameMode(), "", "", "casual");
+            $success = insertPlayer($casual->getPlatform(), $casual->getTag(), $casual->getGameMode(),
+                $casual->getHeroes() , "", "", "casual");
 
             if ($success)
             {
@@ -200,11 +198,97 @@ $f3->route('GET|POST /competitive', function($f3){
         "Master",
         "Grandmaster"
     ));
+    $isValid = true;
 
-    if(isset($_POST['submit'])) {
+    $_SESSION['heroes'] = array();
 
-        $f3->reroute("/summary");
+
+
+    //when the user clicks submit
+    if (isset($_POST['submit']))
+    {
+
+        if (empty($_POST['platform']))
+        {
+            $f3->set("errors['platform']", "Please pick a platform");
+            $isValid = false;
+        }
+
+        else {
+
+            $f3->set('choice', $_POST['platform']);
+        }
+
+        if (isset($_POST['tag']))
+        {
+
+            // validates tag
+            if (validTag($_POST['tag']))
+            {
+                // creates a session variable if entry is valid
+                $_SESSION['tag'] = $_POST['tag'];
+            } else
+            {
+                // otherwise, displays an error
+                $f3->set("errors['tag']", "Please enter a valid tag");
+                $isValid = false;
+            }
+        }
+
+        if (empty($_POST['rank']))
+        {
+
+            $f3->set("errors['rank']", "Please choose your rank (don't lie we will find out)");
+            $isValid = false;
+
+        } else
+        {
+
+            $f3->set('choice', $_POST['mode']);
+        }
+
+        // if the user picks heroes
+        if (isset($_POST['heroes']))
+        {
+            // validates the user's choices
+            foreach ($_POST['heroes'] as $hero)
+            {
+                if (!validHeroes($hero))
+                {
+                    // Otherwise, displays an error
+                    $f3->set("errors['hero']", "Please choose valid heroes.");
+                    $isValid = false;
+                }
+            }
+
+            $_SESSION['heroes'] = $_POST['heroes'];
+            $f3->set('choices', $_SESSION['heroes']);
+            $choices = implode(", ", $_POST['heroes']);
+
+        } else {
+
+            // Otherwise, displays an error
+            $f3->set("errors['hero']", "Please choose valid heroes.");
+            $isValid = false;
+        }
+
+        if ($isValid) {
+
+            $casual = new Casual($_POST['platform'], $_POST['tag'], $choices, $_POST['mode']);
+
+            $success = insertPlayer($casual->getPlatform(), $casual->getTag(), $casual->getGameMode(),
+                $casual->getHeroes() , "", "", "casual");
+
+            if ($success)
+            {
+                $f3->reroute('/summary');
+            }
+
+        }
+
+
     }
+
 
     $template = new Template();
     echo $template->render('views/competitive.html');
@@ -218,12 +302,23 @@ $f3->route('GET|POST /gamers', function(){
 });
 
 //define a default route
-$f3->route('GET|POST /summary', function(){
+$f3->route('GET|POST /summary', function($f3){
 
-
+    $players = getAll();
+    $f3->set('players', $players);
 
     $template = new Template();
     echo $template->render('views/summary.html');
+});
+
+//define a default route
+$f3->route('GET|POST /summary2', function($f3){
+
+    $players = getPlayers();
+    $f3->set('players', $players);
+
+    $template = new Template();
+    echo $template->render('views/summary2.html');
 });
 
 //run fat free

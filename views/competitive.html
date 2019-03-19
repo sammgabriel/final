@@ -39,8 +39,23 @@
                 <div class="form-group">
                     <label class="font-weight-bold mb-3">Competitive Rank</label><br>
                     <repeat group="{{ @ranks }}" value="{{ @rank }}">
-                        <input type="radio" name="rank" value="{{ @rank }}"> {{ @rank }}<br>
+                        <check if="{{ @rank == @choice }}">
+                            <true>
+                                <input class="form-check-input" type="radio" value="{{ @rank }}"
+                                       name="rank" checked="checked">
+                                <label class="form-check-label ml-2 mr-4">
+                                    {{ @rank }}</label><br>
+                            </true>
+                            <false>
+                                <input class="form-check-input" type="radio" value="{{ @rank }}" name="rank">
+                                <label class="form-check-label ml-2 mr-4">
+                                    {{ @rank }}</label><br>
+                            </false>
+                        </check>
                     </repeat>
+                    <check if="{{isset(@errors['rank'])}}">
+                        <p class="alert-danger font-weight-bold">{{@errors['rank']}}</p>
+                    </check>
                 </div>
 
                 <label class="font-weight-bold mb-3">Heroes</label><br>
@@ -49,7 +64,8 @@
                         displays each one -->
                     <repeat group="{{ @heroes }}" value="{{ @hero }}">
                         <div class="col-3">
-                            <input type="checkbox" value="{{ @hero }}" name="heroes[]">
+                            <input class="form-check-input" type="checkbox" value="{{ @hero }}" name="heroes[]"
+                            <check if="{{ in_array(@hero, @SESSION['heroes'])}}">checked = 'checked'</check>>
                             <label class="form-check-label mr-3">{{ @hero }}</label>
                         </div>
                     </repeat>
@@ -66,6 +82,9 @@
                         </div>
                     </repeat>
                 </div><br><br>
+                <check if="{{isset(@errors['hero'])}}">
+                    <p class="alert-danger font-weight-bold">{{@errors['hero']}}</p>
+                </check>
                 <input type="submit" name="submit" class="btn btn-dark text-warning btn-lg mb-3"
                        value="Next">
             </form>

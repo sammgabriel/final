@@ -74,3 +74,23 @@ function getPlayers($type)
 
     return $row;
 }
+
+function getAll()
+{
+    //grab the database object
+    global $dbh;
+
+    //Define the query
+    $sql = "SELECT * FROM final ";
+
+    //prepare the statement
+    $statement = $dbh->prepare($sql);
+
+    //execute
+    $statement->execute();
+
+    //process the result
+    $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $row;
+}
