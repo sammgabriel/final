@@ -50,7 +50,38 @@ $heroes = array(
     "Zarya",
     "Zenyatta"
 );
-
+$heroes2 = array(
+    "Ana",
+    "Ashe",
+    "Baptiste",
+    "Bastion",
+    "Brigitte",
+    "D.Va",
+    "Doomfist",
+    "Genji",
+    "Hanzo",
+    "Junkrat",
+    "Lucio",
+    "McCree",
+    "Mei",
+    "Mercy",
+    "Moira",
+    "Orisa",
+    "Pharah",
+    "Reaper",
+    "Reinhardt",
+    "Roadhog",
+    "Soldier: 76",
+    "Sombra",
+    "Symmetra",
+    "Torbjorn",
+    "Tracer",
+    "Widowmaker",
+    "Winston",
+    "Wrecking Ball",
+    "Zarya",
+    "Zenyatta"
+);
 $f3->set('heroes', $heroes);
 
 $platform = array("Xbox", "Playstation", "PC");
@@ -161,6 +192,31 @@ $f3->route('GET|POST /casual', function($f3) {
 
             // Otherwise, displays an error
             $f3->set("errors['hero']", "Please choose valid heroes.");
+            $isValid = false;
+        }
+
+        // if the user picks heroes2
+        if (isset($_POST['heroes2']))
+        {
+            // validates the user's choices
+            foreach ($_POST['heroes2'] as $hero2)
+            {
+                if (!validHeroes($hero2))
+                {
+                    // Otherwise, displays an error
+                    $f3->set("errors['hero2']", "Please choose valid heroes.");
+                    $isValid = false;
+                }
+            }
+
+            $_SESSION['heroes2'] = $_POST['heroes2'];
+            $f3->set('choices', $_SESSION['heroes2']);
+            $choices = implode(", ", $_POST['heroes2']);
+
+        } else {
+
+            // Otherwise, displays an error
+            $f3->set("errors['hero2']", "Please choose valid heroes.");
             $isValid = false;
         }
 

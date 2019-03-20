@@ -70,20 +70,24 @@
                         </div>
                     </repeat>
                 </div><br><br>
-
+                <check if="{{isset(@errors['hero'])}}">
+                    <p class="alert-danger font-weight-bold">{{@errors['hero']}}</p>
+                </check>
+                <!-- Pair heroes -->
                 <label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
                 <div class="form-check form-check-inline flex-wrap">
                     <!-- Loops through the array of indoor interests and
                         displays each one -->
-                    <repeat group="{{ @heroes }}" value="{{ @hero }}">
+                    <repeat group="{{ @heroes2 }}" value="{{ @hero2 }}">
                         <div class="col-3">
-                            <input type="checkbox" value="{{ @hero }}" name="pairs[]">
-                            <label class="form-check-label mr-3">{{ @hero }}</label>
+                            <input class="form-check-input" type="checkbox" value="{{ @hero2 }}" name="heroes2[]"
+                            <check if="{{ in_array(@hero2, @SESSION['heroes2'])}}">checked = 'checked'</check>>
+                            <label class="form-check-label mr-3">{{ @hero2 }}</label>
                         </div>
                     </repeat>
                 </div><br><br>
-                <check if="{{isset(@errors['hero'])}}">
-                    <p class="alert-danger font-weight-bold">{{@errors['hero']}}</p>
+                <check if="{{isset(@errors['hero2'])}}">
+                    <p class="alert-danger font-weight-bold">{{@errors['hero2']}}</p>
                 </check>
                 <input type="submit" name="submit" class="btn btn-dark text-warning btn-lg mb-3"
                        value="Next">
