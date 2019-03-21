@@ -1,4 +1,8 @@
 # final
+
+## Sam Gabriel
+## Nic Alexander
+
 1. We seperated all the database/business logic by putting files in their correct directories
 2. In the index all of our routing uses templating via fatfree
 3. We define our database layer in the model directory in file named database. We use this in the index

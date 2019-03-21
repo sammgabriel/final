@@ -1,4 +1,14 @@
-// Validates all the entries in the form
+/*
+
+    Author Name: Sam Gabriel, Nic Alexander
+    Date: March 20, 2019
+    File Name: comp-validation.js
+
+    This is the JavaScript validation for the Competitive player form.
+
+ */
+
+// Validates all the entries in the competitive form
 document.getElementById("compForm").onsubmit = validateComp;
 
 function validateComp()
@@ -14,7 +24,7 @@ function validateComp()
         errors[i].style.visibility = "hidden";
     }
 
-    // Shows error message if first name field is left blank
+    // Shows error message if a platform has not been chosen
     var platform = document.getElementById("platform").value;
     if(platform == "none")
     {
@@ -24,7 +34,7 @@ function validateComp()
         isValid = false;
     }
 
-    // Shows error message if first name field is left blank
+    // Shows error message if tag has been left blank
     var tag = document.getElementById("tag").value;
     if(tag == "")
     {
@@ -34,6 +44,7 @@ function validateComp()
         isValid = false;
     }
 
+    // Shows error message if a rank has not been chosen
     var rank = document.getElementsByName("rank");
     var rankVal = "";
     for (var j = 0; j < rank.length; j++) {
@@ -49,6 +60,7 @@ function validateComp()
         isValid = false;
     }
 
+    // Shows error message if heroes have not been chosen
     var heroes = document.getElementsByName("heroes[]");
     var heroVals = [];
 
@@ -67,6 +79,7 @@ function validateComp()
         isValid = false;
     }
 
+    // Shows error message if ideal teammates have not been chosen
     var idealPairs = document.getElementsByName("heroes2[]");
     var pairVals = [];
 
@@ -84,7 +97,6 @@ function validateComp()
         errPairs.style.visibility = "visible";
         isValid = false;
     }
-
 
     // Returns the validation value
     return isValid;

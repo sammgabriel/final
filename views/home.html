@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+
+       Author Name: Sam Gabriel, Nic Alexander
+       Date: March 20, 2019
+       File Name: home.html
+
+       This is the home page for the Overwatch Looking for Gamers (LFG)
+       website.
+
+    -->
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/final2.css">
@@ -30,15 +40,17 @@
 
             <h2>Let's get started!</h2><br>
 
+            <!-- Buttons -->
             <a id="create" class="btn btn-dark text-warning btn-lg">Join</a>
             <a href="gamers" class="btn btn-dark text-warning btn-lg">View Gamers</a>
 
-            <!-- Field validation error -->
+            <!-- Error messages -->
             <check if="{{ isset(@errors['type']) }}">
                 <p class="mt-3">{{ @errors['type']}}</p>
             </check>
             <div id="gameType">
                 <form action="#" method="post" class="mt-3">
+                    <!-- Game type fields-->
                     <div class="form-group form-check-inline">
                         <div class="form-check">
                             <input type="radio" class="form-check-input text-left" name="type" value="Casual">
@@ -49,6 +61,7 @@
                             <label class="form-check-label">Competitive</label>
                         </div>
                     </div>
+                    <!-- Submit button -->
                     <input type="submit" name="submit" class="btn btn-dark text-warning btn-sm mb-3" value="Next">
                 </form>
             </div>
@@ -61,9 +74,6 @@
 <script src="JS/jquery-ajax.js"></script>
 <script src="JS/popper.min.js"></script>
 <script src="JS/bootstrap.min.js"></script>
-
-
-
 
 </body>
 </html>

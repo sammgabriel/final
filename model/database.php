@@ -1,10 +1,25 @@
 <?php
 
+/**
+ *
+ * Author Name: Sam Gabriel, Nic Alexander
+ * Date: March 20, 2019
+ * File Name: Casual.php
+ *
+ * Casual player class
+ *
+ */
+
+// Database configuration file
 require '/home/nalexand/config.php';
 
-//require("/home/sgabriel/config.php");
-
 //connect to database
+/**
+ *
+ * Connect to the database
+ *
+ * @return PDO|void
+ */
 function connect()
 {
 
@@ -22,6 +37,19 @@ function connect()
     }
 }
 
+/**
+ *
+ * Inserts a player into the database
+ *
+ * @param $platform
+ * @param $tag
+ * @param $modes
+ * @param $heros
+ * @param $pair
+ * @param $rank
+ * @param $type
+ * @return bool
+ */
 function insertPlayer($platform, $tag, $modes, $heros, $pair, $rank, $type)
 {
     global $dbh;
@@ -34,13 +62,20 @@ function insertPlayer($platform, $tag, $modes, $heros, $pair, $rank, $type)
     $statement = $dbh->prepare($sql);
 
     //bind parameters
-    $statement->bindParam(':platform', $platform, PDO::PARAM_STR);
-    $statement->bindParam(':tag', $tag, PDO::PARAM_STR);
-    $statement->bindParam(':modes', $modes,PDO::PARAM_STR);
-    $statement->bindParam(':heros', $heros, PDO::PARAM_STR);
-    $statement->bindParam(':pair', $pair, PDO::PARAM_STR);
-    $statement->bindParam(':rank', $rank, PDO::PARAM_STR);
-    $statement->bindParam(':type', $type, PDO::PARAM_STR);
+    $statement->bindParam(':platform', $platform,
+        PDO::PARAM_STR);
+    $statement->bindParam(':tag', $tag,
+        PDO::PARAM_STR);
+    $statement->bindParam(':modes', $modes,
+        PDO::PARAM_STR);
+    $statement->bindParam(':heros', $heros,
+        PDO::PARAM_STR);
+    $statement->bindParam(':pair', $pair,
+        PDO::PARAM_STR);
+    $statement->bindParam(':rank', $rank,
+        PDO::PARAM_STR);
+    $statement->bindParam(':type', $type,
+        PDO::PARAM_STR);
 
     //execute the statement
     $success = $statement->execute();
@@ -49,9 +84,12 @@ function insertPlayer($platform, $tag, $modes, $heros, $pair, $rank, $type)
     return $success;
 }
 
-
-
-
+/**
+ *
+ * Displays all competitive players
+ *
+ * @return array
+ */
 function getComp()
 {
     //grab the database object
@@ -63,18 +101,22 @@ function getComp()
     //prepare the statement
     $statement = $dbh->prepare($sql);
 
-    //bind parameters
-    //$statement->bindParam(':type', $type, PDO::PARAM_STR);
-
     //execute
     $statement->execute();
 
     //process the result
     $row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    // Return rows from the database
     return $row;
 }
 
+/**
+ *
+ * Displays everyone in the database
+ *
+ * @return array
+ */
 function getAll()
 {
     //grab the database object
@@ -92,9 +134,16 @@ function getAll()
     //process the result
     $row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    // Return rows from the database
     return $row;
 }
 
+/**
+ *
+ * Displays all casual players
+ *
+ * @return array
+ */
 function getCasual()
 {
     //grab the database object
@@ -112,5 +161,6 @@ function getCasual()
     //process the result
     $row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    // Return rows from the database
     return $row;
 }

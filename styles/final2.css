@@ -1,7 +1,14 @@
-#gameType {
+@charset "utf-8";
 
-    display: none;
-}
+/* This file contains CSS for the LFG page */
+
+/*
+
+   Author Name: Sam Gabriel, Nic Alexander
+   Date: March 20, 2019
+   File name: final2.css
+
+*/
 
 /* Class Styles */
 .err {
@@ -11,6 +18,14 @@
     text-shadow: 2px 2px black;
     padding-left: 0.3em;
 }
+
+/* Game type options on the home page */
+#gameType {
+
+    display: none;
+}
+
+/* HTML and body styles */
 html,body {
 
     background: url("ppl.jpg");

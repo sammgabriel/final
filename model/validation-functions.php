@@ -1,24 +1,28 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: sammgabriel
- * Date: 2019-03-18
- * Time: 11:16
+ *
+ * Author Name: Sam Gabriel, Nic Alexander
+ * Date: March 20, 2019
+ * File Name: validation-functions.php
+ *
+ * PHP validation functions
+ *
  */
 
 /**
  *
  * Validates name
- * Checks if the entry is alphabetic
+ * Checks if the entry is alphanumeric
  *
  * Referred to the PHP documentation to determine how to validate
- * if an entry is alphabetic
+ * if an entry is alphanumeric
  *
  * @param $tag
  * @return bool
  *
  */
-function validTag($tag) {
+function validTag($tag)
+{
 
     return ctype_alnum($tag);
 }
@@ -32,7 +36,8 @@ function validTag($tag) {
  * @return bool
  *
  */
-function validHeroes($heroes) {
+function validHeroes($heroes)
+{
 
     global $f3;
     return in_array($heroes, $f3->get('heroes'));

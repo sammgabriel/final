@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+
+       Author Name: Sam Gabriel, Nic Alexander
+       Date: March 20, 2019
+       File Name: all-gamers.html
+
+       This displays all gamers in the database
+
+    -->
     <meta charset="UTF-8">
     <script src="JS/jquery-3.3.1.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
@@ -10,7 +19,10 @@
 <body>
 
 <h1>Find your gaming companions</h1>
+<!-- Link to the home page -->
 <a id="this" href="/328/final" class="btn btn-dark text-warning btn-lg mb-5 float-right">Home</a>
+
+<!-- Displays all user data in a table -->
 <table class="mt-4" id="players">
     <thead>
     <tr>
@@ -39,6 +51,7 @@
 </table>
 
 <script src="//code.jquery.com/jquery-3.3.1.js"></script>
+<!-- jQuery data table-->
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script>
     $("#players").DataTable();

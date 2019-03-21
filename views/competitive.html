@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--
+
+       Author Name: Sam Gabriel, Nic Alexander
+       Date: March 20, 2019
+       File Name: competitive.html
+
+       This is the form for competitive players.
+
+    -->
     <meta charset="UTF-8">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/final.css">
@@ -18,12 +27,15 @@
 
         <div class="col-8">
 
+            <!-- Form -->
             <form action="#" method="post" id="compForm">
 
                 <div class="form-group">
+                    <!-- Gaming platform field -->
                     <label class="font-weight-bold">Platform</label>
                     <select name="platform" id="platform" class="form-control">
                         <option value="none">Select One</option>
+                        <!-- Displays all choices and makes it sticky -->
                         <repeat group="{{ @platform }}" value="{{ @plat }}">
                             <check if="{{ @plat == @choice }}">
                                 <true>
@@ -35,6 +47,7 @@
                             </check>
                         </repeat>
                     </select>
+                    <!-- Error messages -->
                     <span class="err" id="err-plat"> Please choose a platform.</span>
                     <check if="{{ isset(@errors['platform']) }}">
                         <p class="alert-danger font-weight-bold">{{ @errors['platform'] }}</p>
@@ -42,8 +55,10 @@
                 </div>
 
                 <div class="form-group">
+                    <!-- Gaming username field -->
                     <label class="font-weight-bold">GamerTag/PSN/BattleTag</label>
                     <input type="text" id="tag" name="tag" value="{{@_POST.tag}}" class="form-control">
+                    <!-- Error messages -->
                     <span class="err" id="err-tag"> Please enter in a username.</span>
                     <check if="{{isset(@errors['tag'])}}">
                         <p class="alert-danger font-weight-bold">{{@errors['tag']}}</p>
@@ -51,7 +66,9 @@
                 </div>
 
                 <div class="form-group">
+                    <!-- Rank field -->
                     <label class="font-weight-bold mb-3">Competitive Rank</label><br>
+                    <!-- Displays all choices and makes it sticky -->
                     <repeat group="{{ @ranks }}" value="{{ @rank }}">
                         <check if="{{ @rank == @rankChoice }}">
                             <true>
@@ -67,16 +84,17 @@
                             </false>
                         </check>
                     </repeat>
+                    <!-- Error messages -->
                     <span class="err" id="err-rank"> Please choose a rank.</span>
                     <check if="{{isset(@errors['rank'])}}">
                         <p class="alert-danger font-weight-bold">{{@errors['rank']}}</p>
                     </check>
                 </div>
 
+                <!-- Hero choices field -->
                 <label class="font-weight-bold mb-3">Heroes</label><br>
                 <div class="form-check form-check-inline flex-wrap">
-                    <!-- Loops through the array of indoor interests and
-                        displays each one -->
+                    <!-- Displays all choices and makes field sticky -->
                     <repeat group="{{ @heroes }}" value="{{ @hero }}">
                         <div class="col-3">
                             <input class="form-check-input" type="checkbox" value="{{ @hero }}" name="heroes[]"
@@ -85,16 +103,16 @@
                         </div>
                     </repeat>
                 </div><br><br>
+                <!-- Error messages -->
                 <span class="err" id="err-heroes"> Please choose heroes.</span><br><br>
                 <check if="{{isset(@errors['hero'])}}">
                     <p class="alert-danger font-weight-bold">{{@errors['hero']}}</p>
                 </check>
 
-                <!-- Pair heroes -->
+                <!-- Ideal teammates field -->
                 <label class="font-weight-bold mb-3">Heroes You Would Like To Be Paired With</label><br>
                 <div class="form-check form-check-inline flex-wrap">
-                    <!-- Loops through the array of indoor interests and
-                        displays each one -->
+                    <!-- Displays each choice and makes it sticky -->
                     <repeat group="{{ @heroes2 }}" value="{{ @hero2 }}">
                         <div class="col-3">
                             <input class="form-check-input" type="checkbox" value="{{ @hero2 }}" name="heroes2[]"
@@ -103,25 +121,25 @@
                         </div>
                     </repeat>
                 </div><br><br>
+                <!-- Error messages -->
                 <span class="err" id="err-pairs"> Please choose heroes you would like to be paired with.</span><br><br>
                 <check if="{{isset(@errors['hero2'])}}">
                     <p class="alert-danger font-weight-bold">{{@errors['hero2']}}</p>
                 </check>
+                <!-- Submit button -->
                 <input type="submit" name="submit" class="btn btn-dark text-warning btn-lg mb-3"
                        value="Next">
             </form>
-
         </div>
 
         <div class="col-3">
+            <!-- View all gamers -->
             <form action="gamers" method="post">
                 <input type="submit" class="btn btn-dark text-warning btn-lg mb-5 float-right"
                        value="View Gamers">
             </form>
         </div>
-
     </div>
-
 </div>
 
 <script src="JS/comp-validation.js"></script>

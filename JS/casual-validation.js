@@ -1,4 +1,14 @@
-// Validates all the entries in the form
+/*
+
+    Author Name: Sam Gabriel, Nic Alexander
+    Date: March 20, 2019
+    File Name: casual-validation.js
+
+    This is the JavaScript validation for the Casual player form.
+
+ */
+
+// Validates all the entries in the casual player form
 document.getElementById("casualForm").onsubmit = validateCasual;
 
 function validateCasual()
@@ -14,7 +24,7 @@ function validateCasual()
         errors[i].style.visibility = "hidden";
     }
 
-    // Shows error message if first name field is left blank
+    // Shows error message if a platform has not been chosen
     var platform = document.getElementById("platform").value;
     if(platform == "none")
     {
@@ -24,7 +34,7 @@ function validateCasual()
         isValid = false;
     }
 
-    // Shows error message if first name field is left blank
+    // Shows error message if tag is left blank
     var tag = document.getElementById("tag").value;
     if(tag == "")
     {
@@ -34,6 +44,7 @@ function validateCasual()
         isValid = false;
     }
 
+    // Shows error message if a game mode has not been chosen
     var mode = document.getElementsByName("mode");
     var modeVal = "";
     for (var j = 0; j < mode.length; j++) {
@@ -49,6 +60,7 @@ function validateCasual()
         isValid = false;
     }
 
+    // Shows error message if heroes have not been chosen
     var heroes = document.getElementsByName("heroes[]");
     var heroVals = [];
 
