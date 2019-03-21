@@ -7,6 +7,42 @@
 .err {
 
     visibility: hidden;
-    color: darkred;
+    color: orange;
+    text-shadow: 2px 2px black;
     padding-left: 0.3em;
+}
+html,body {
+    height: 100%;
+    background: url("symbol.jpg") no-repeat center center fixed;
+    background-size: cover;
+
+}
+
+label{
+    font-style: italic;
+    color: gold;
+    font-weight: bold;
+    text-shadow: 2px 2px black;
+}
+h1{
+    color: gold;
+    text-shadow: 2px 2px black;
+}
+
+th{
+    color: gold;
+    text-shadow: 2px 2px black;
+}
+
+td{
+    font-style: italic;
+    color: black;
+}
+#this{
+    color:gold;
+    text-decoration: none;
+}
+#this:hover{
+    background-color: gold;
+    color: black;
 }

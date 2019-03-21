@@ -1,0 +1,19 @@
+#gameType {
+
+    display: none;
+}
+
+/* Class Styles */
+.err {
+
+    visibility: hidden;
+    color: orange;
+    text-shadow: 2px 2px black;
+    padding-left: 0.3em;
+}
+html,body {
+
+    background: url("ppl.jpg");
+    background-size: cover;
+
+}

@@ -357,6 +357,7 @@ $f3->route('GET|POST /competitive', function($f3){
 $f3->route('GET|POST /gamers', function($f3){
     $players = getAll();
     $f3->set('players', $players);
+
     $template = new Template();
     echo $template->render('views/all-gamers.html');
 });
@@ -364,7 +365,7 @@ $f3->route('GET|POST /gamers', function($f3){
 //define a default route
 $f3->route('GET|POST /summary', function($f3){
 
-    $players = getAll();
+    $players = getCasual();
     $f3->set('players', $players);
 
     $template = new Template();
