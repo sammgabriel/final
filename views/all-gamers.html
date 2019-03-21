@@ -2,11 +2,43 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="JS/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <title>All Gamers</title>
 </head>
 <body>
 
-<h1>All Gamers</h1>
+<h1>Find your gaming companions</h1>
 
+<table class="mt-4" id="players">
+    <thead>
+    <tr>
+        <th>Platform</th>
+        <th>Tag</th>
+        <th>Mode</th>
+        <th>Heroes</th>
+        <th>Pairs</th>
+        <th>Rank</th>
+    </tr>
+    </thead>
+    <tbody>
+    <repeat group="{{@players}}" value="{{@player}}">
+        <tr>
+            <td>{{@player['platform']}}</td>
+            <td>{{@player['tag']}}</td>
+            <td>{{@player['modes']}}</td>
+            <td>{{@player['heros']}}</td>
+            <td>{{@player['pair']}}</td>
+            <td>{{@player['rank']}}</td>
+        </tr>
+    </repeat>
+    </tbody>
+</table>
+
+<script src="//code.jquery.com/jquery-3.3.1.js"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+    $("#players").DataTable();
+</script>
 </body>
 </html>

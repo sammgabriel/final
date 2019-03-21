@@ -83,6 +83,7 @@ $heroes2 = array(
     "Zenyatta"
 );
 $f3->set('heroes', $heroes);
+$f3->set('heroes2', $heroes2);
 
 $platform = array("Xbox", "Playstation", "PC");
 
@@ -195,30 +196,7 @@ $f3->route('GET|POST /casual', function($f3) {
             $isValid = false;
         }
 
-        // if the user picks heroes2
-        if (isset($_POST['heroes2']))
-        {
-            // validates the user's choices
-            foreach ($_POST['heroes2'] as $hero2)
-            {
-                if (!validHeroes($hero2))
-                {
-                    // Otherwise, displays an error
-                    $f3->set("errors['hero2']", "Please choose valid heroes.");
-                    $isValid = false;
-                }
-            }
 
-            $_SESSION['heroes2'] = $_POST['heroes2'];
-            $f3->set('choices', $_SESSION['heroes2']);
-            $choices = implode(", ", $_POST['heroes2']);
-
-        } else {
-
-            // Otherwise, displays an error
-            $f3->set("errors['hero2']", "Please choose valid heroes.");
-            $isValid = false;
-        }
 
         if ($isValid) {
 
@@ -233,7 +211,6 @@ $f3->route('GET|POST /casual', function($f3) {
             }
 
         }
-
 
     }
     $template = new Template();
@@ -257,6 +234,7 @@ $f3->route('GET|POST /competitive', function($f3){
     $isValid = true;
 
     $_SESSION['heroes'] = array();
+    $_SESSION['heroes2'] = array();
 
 
 
@@ -300,7 +278,7 @@ $f3->route('GET|POST /competitive', function($f3){
         } else
         {
 
-            $f3->set('choice', $_POST['mode']);
+            $f3->set('rankChoice', $_POST['rank']);
         }
 
         // if the user picks heroes
@@ -319,7 +297,7 @@ $f3->route('GET|POST /competitive', function($f3){
 
             $_SESSION['heroes'] = $_POST['heroes'];
             $f3->set('choices', $_SESSION['heroes']);
-            $choices = implode(", ", $_POST['heroes']);
+            $choices2 = implode(", ", $_POST['heroes']);
 
         } else {
 
@@ -328,16 +306,41 @@ $f3->route('GET|POST /competitive', function($f3){
             $isValid = false;
         }
 
+        // if the user picks heroes2
+        if (isset($_POST['heroes2']))
+        {
+            // validates the user's choices
+            foreach ($_POST['heroes2'] as $hero2)
+            {
+                if (!validHeroes($hero2))
+                {
+                    // Otherwise, displays an error
+                    $f3->set("errors['hero2']", "Please choose valid heroes.");
+                    $isValid = false;
+                }
+            }
+
+            $_SESSION['heroes2'] = $_POST['heroes2'];
+            $f3->set('choices2', $_SESSION['heroes2']);
+            $choices = implode(", ", $_POST['heroes2']);
+
+        } else {
+
+            // Otherwise, displays an error
+            $f3->set("errors['hero2']", "Please choose valid heroes.");
+            $isValid = false;
+        }
+
         if ($isValid) {
 
-            $casual = new Casual($_POST['platform'], $_POST['tag'], $choices, $_POST['mode']);
+            $ranked = new Ranked($_POST['platform'], $_POST['tag'], $_POST['rank'],"", $choices, $choices2);
 
-            $success = insertPlayer($casual->getPlatform(), $casual->getTag(), $casual->getGameMode(),
-                $casual->getHeroes() , "", "", "casual");
+            $success = insertPlayer($ranked->getPlatform(), $ranked->getTag(), "",
+                $ranked->getRank() , $ranked->getIdealPairs(), $ranked->getHeroes(), "competitive");
 
             if ($success)
             {
-                $f3->reroute('/summary');
+                $f3->reroute('/summary2');
             }
 
         }
@@ -351,8 +354,9 @@ $f3->route('GET|POST /competitive', function($f3){
 });
 
 //define a default route
-$f3->route('GET|POST /gamers', function(){
-
+$f3->route('GET|POST /gamers', function($f3){
+    $players = getAll();
+    $f3->set('players', $players);
     $template = new Template();
     echo $template->render('views/all-gamers.html');
 });
@@ -370,7 +374,7 @@ $f3->route('GET|POST /summary', function($f3){
 //define a default route
 $f3->route('GET|POST /summary2', function($f3){
 
-    $players = getPlayers();
+    $players = getComp();
     $f3->set('players', $players);
 
     $template = new Template();

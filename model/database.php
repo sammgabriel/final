@@ -52,25 +52,25 @@ function insertPlayer($platform, $tag, $modes, $heros, $pair, $rank, $type)
 
 
 
-function getPlayers($type)
+function getComp()
 {
     //grab the database object
     global $dbh;
 
     //Define the query
-    $sql = "SELECT * FROM final WHERE type = :type";
+    $sql = "SELECT * FROM final WHERE type = 'competitive'";
 
     //prepare the statement
     $statement = $dbh->prepare($sql);
 
     //bind parameters
-    $statement->bindParam(':type', $type, PDO::PARAM_STR);
+    //$statement->bindParam(':type', $type, PDO::PARAM_STR);
 
     //execute
     $statement->execute();
 
     //process the result
-    $row = $statement->fetch(PDO::FETCH_ASSOC);
+    $row = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     return $row;
 }

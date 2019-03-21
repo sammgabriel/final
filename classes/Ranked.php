@@ -11,6 +11,13 @@ class Ranked extends Casual {
     private $_idealPairs;
     private $_rank;
 
+    public function __construct($platform, $tag, $heroes, $gameMode, $idealPairs, $rank)
+    {
+        parent::__construct($platform, $tag, $heroes, $gameMode);
+        $this->_idealPairs = $idealPairs;
+        $this->_rank = $rank;
+    }
+
     /**
      * @return mixed
      */
