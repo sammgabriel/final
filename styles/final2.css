@@ -23,6 +23,8 @@
 #gameType {
 
     display: none;
+    color: gold;
+    text-shadow: 2px 2px black;
 }
 
 /* HTML and body styles */
